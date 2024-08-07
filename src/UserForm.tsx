@@ -15,6 +15,7 @@ function UserForm({ onUserAdd }: PropType) {
     // console.log(event.currentTarget.email);
 
     onUserAdd({ name, email });
+    console.log({ name, email });
   }
 
   return (
@@ -35,10 +36,9 @@ function UserForm({ onUserAdd }: PropType) {
           value={email}
           name="email"
           type="email"
-          id=""
         />
       </div>
-      <button>Submit</button>
+      <button type="submit">Submit</button>
     </form>
   );
 }
