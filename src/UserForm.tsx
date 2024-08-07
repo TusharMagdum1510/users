@@ -21,21 +21,23 @@ function UserForm({ onUserAdd }: PropType) {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="">Name</label>
+        <label htmlFor="name">Name</label>
         <input
           onChange={(e) => setName(e.target.value)}
           value={name}
           name="name"
           type="text"
+          id="name"
         />
       </div>
       <div>
-        <label htmlFor="">Email</label>
+        <label htmlFor="email">Email</label>
         <input
           onChange={(e) => setEmail(e.target.value)}
           value={email}
           name="email"
           type="email"
+          id="email"
         />
       </div>
       <button type="submit">Submit</button>

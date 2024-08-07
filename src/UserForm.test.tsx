@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import user from "@testing-library/user-event";
 import UserForm from "./UserForm";
-import { UsersType } from "./App";
+// import { UsersType } from "./App";
 
 test("it shows two inputs and a button", () => {
   // Create a mock function for onUserAdd
@@ -21,6 +21,8 @@ test("it shows two inputs and a button", () => {
   expect(button).toBeInTheDocument();
 });
 
+//todo STIMULATING USER EVENTS
+/*
 test("it calls onUserAdd when the form is submitted", async () => {
   //? Not the best implementation
   const argList: UsersType[] = [];
@@ -62,4 +64,70 @@ test("it calls onUserAdd when the form is submitted", async () => {
   //   name: "Tom",
   //   email: "tom@gmail.com",
   // });
+});
+*/
+
+//todo RECORDING FUNCTION CALLS
+
+/*
+test("it calls onUserAdd when the form is submitted", async () => {
+  const mock = jest.fn();
+
+  //! Try to render component
+  render(<UserForm onUserAdd={mock} />);
+
+  //! Find two inputs
+  const [nameInput, emailInput] = screen.getAllByRole("textbox");
+
+  //! Stimulate typing in a name
+  await user.click(nameInput);
+  await user.keyboard("tom");
+
+  //! Stimulate typing in an email
+  await user.click(emailInput);
+  await user.keyboard("tom@gmail.com");
+
+  //! Find the button
+  const buttons = screen.getByRole("button");
+
+  //! Stimulate clicking on the button
+  await user.click(buttons);
+
+  //! Assertion to make sure that onUserAdd gets called with email/name
+  expect(mock).toHaveBeenCalled();
+  expect(mock).toHaveBeenCalledTimes(1);
+  expect(mock).toHaveBeenCalledWith({ name: "tom", email: "tom@gmail.com" });
+});
+*/
+
+//todo QUEYING ELEMENTS BY LABELS
+
+test("it calls onUserAdd when the form is submitted", async () => {
+  const mock = jest.fn();
+
+  //! Try to render component
+  render(<UserForm onUserAdd={mock} />);
+
+  //! Find two inputs
+const nameInput = screen.getByRole('textbox',{name:/name/i});
+const emailInput = screen.getByRole('textbox',{name:/email/i})
+
+  //! Stimulate typing in a name
+  await user.click(nameInput);
+  await user.keyboard("tom");
+
+  //! Stimulate typing in an email
+  await user.click(emailInput);
+  await user.keyboard("tom@gmail.com");
+
+  //! Find the button
+  const buttons = screen.getByRole("button");
+
+  //! Stimulate clicking on the button
+  await user.click(buttons);
+
+  //! Assertion to make sure that onUserAdd gets called with email/name
+  expect(mock).toHaveBeenCalled();
+  expect(mock).toHaveBeenCalledTimes(1);
+  expect(mock).toHaveBeenCalledWith({ name: "tom", email: "tom@gmail.com" });
 });
