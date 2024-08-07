@@ -16,6 +16,8 @@ function UserForm({ onUserAdd }: PropType) {
 
     onUserAdd({ name, email });
     console.log({ name, email });
+    setEmail("");
+    setName("");
   }
 
   return (
